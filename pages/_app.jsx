@@ -38,24 +38,24 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <SessionProvider session={pageProps.session}>
-            <ThemeProvider enableSystem={true} attribute="class">
-              <Header />
-              {loading ? (
-                <>
-                  <LoadingSpinner />
-                </>
-              ) : (
-                <>
+      {loading ? (
+        <>
+          <LoadingSpinner />
+        </>
+      ) : (
+        <>
+          <QueryClientProvider client={queryClient}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <SessionProvider session={pageProps.session}>
+                <ThemeProvider enableSystem={true} attribute="class">
+                  <Header />
                   <Component {...pageProps} />
-                </>
-              )}
-            </ThemeProvider>
-          </SessionProvider>
-        </Hydrate>
-      </QueryClientProvider>
+                </ThemeProvider>
+              </SessionProvider>
+            </Hydrate>
+          </QueryClientProvider>
+        </>
+      )}
     </>
   );
 }
