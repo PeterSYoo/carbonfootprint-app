@@ -5,6 +5,7 @@ const clothesSchema = new Schema({
     type: SchemaTypes.ObjectId,
     ref: 'User',
   },
+  name: String,
   color: String,
   size: String,
   occasion: String,
