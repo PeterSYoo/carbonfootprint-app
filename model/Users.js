@@ -3,6 +3,7 @@ import { Schema, model, models } from 'mongoose';
 const userSchema = new Schema({
   firstName: String,
   lastName: String,
+  username: String,
   name: String,
   email: String,
   image: String,

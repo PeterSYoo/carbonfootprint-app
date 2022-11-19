@@ -1,5 +1,5 @@
-import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 import { MoonLoader } from 'react-spinners';
 
 export const LoadingSpinner = () => {
@@ -17,7 +17,7 @@ export const LoadingSpinner = () => {
     return (
       <>
         <div className="min-w-screen min-h-screen mt-10 flex justify-center">
-          <MoonLoader color="#919191" size="30" />
+          <MoonLoader color="#919191" size="30px" />
         </div>
       </>
     );
@@ -25,7 +25,7 @@ export const LoadingSpinner = () => {
     return (
       <>
         <div className="min-w-screen min-h-screen mt-10 flex justify-center">
-          <MoonLoader color="#545454" size="30" />
+          <MoonLoader color="#545454" size="30px" />
         </div>
       </>
     );

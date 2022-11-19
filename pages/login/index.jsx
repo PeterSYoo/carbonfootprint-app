@@ -23,5 +23,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-// Test
