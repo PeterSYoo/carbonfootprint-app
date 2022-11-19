@@ -41,6 +41,12 @@ const ChangeUsernamePage = () => {
   });
 
   useEffect(() => {
+    if (data?.username) {
+      router.push('/browse');
+    }
+  }, [data?.username]);
+
+  useEffect(() => {
     setHydrated(true);
   }, []);
 
