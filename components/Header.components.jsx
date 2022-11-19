@@ -1,9 +1,17 @@
-import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
-import React from 'react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { ThemeButton } from './ThemeButton.components';
 
 export const Header = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  const handleSignout = async () => {
+    await signOut();
+    router.push('/');
+  };
+
   return (
     <>
       <div className="flex flex-col bg-gray-300 pt-16 items-center">
@@ -13,7 +21,11 @@ export const Header = () => {
         <Link href="/">
           <h1 className="text-3xl font-bold mb-3">Our Closet</h1>
         </Link>
-        <button onClick={() => signOut()}>Logout</button>
+        {session ? (
+          <button onClick={handleSignout}>Logout</button>
+        ) : (
+          <>Logged Out</>
+        )}
       </div>
     </>
   );
