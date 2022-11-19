@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-w-screen flex flex-col mt-8">
+      <div className="min-w-screen flex flex-col mt-8 mb-20">
         <div className="bg-gray-300 w-5/6 h-48 flex justify-center items-center mx-auto">
           Sustainable Clothing Rental Community
         </div>
