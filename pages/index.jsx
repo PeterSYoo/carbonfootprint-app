@@ -1,8 +1,13 @@
-import { useSession } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
 
-const Guest = (handleGoogleSignin) => {
+export default function Home() {
+  const handleGoogleSignin = async () => {
+    signIn('google', {
+      callbackUrl: '/change-username',
+    });
+  };
+
   return (
     <>
       <div className="min-w-screen flex flex-col mt-8">
@@ -25,24 +30,4 @@ const Guest = (handleGoogleSignin) => {
       </div>
     </>
   );
-};
-
-const User = ({ session }) => {
-  return (
-    <>
-      <div className="min-w-screen flex justify-center mt-10">Welcome</div>
-    </>
-  );
-};
-
-export default function Home() {
-  const { data: session } = useSession();
-
-  const handleGoogleSignin = async () => {
-    signIn('google', {
-      callbackUrl: '/change-username',
-    });
-  };
-
-  return <>{session ? User({ session }) : Guest(handleGoogleSignin)}</>;
 }
