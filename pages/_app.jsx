@@ -1,15 +1,15 @@
-import { ThemeProvider } from 'next-themes';
-import { Header } from '../components/Header.components';
+import { useEffect, useState } from 'react';
+import Router from 'next/router';
 import { SessionProvider } from 'next-auth/react';
-import '../styles/globals.css';
+import { ThemeProvider } from 'next-themes';
 import {
   QueryClientProvider,
   QueryClient,
   Hydrate,
 } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import Router from 'next/router';
+import { Header } from '../components/Header.components';
 import { LoadingSpinner } from '../components/LoadingSpinner.components';
+import '../styles/globals.css';
 
 const queryClient = new QueryClient();
 
