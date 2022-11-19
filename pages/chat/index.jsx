@@ -2,27 +2,24 @@ import { useCallback, useEffect, useState } from "react"
 import { io } from "socket.io-client"
 export default function MinEditor() {
   const [socket, setSocket] = useState()
+  const [box, setBox] = useState()
+  const [conversation, setConversations]= useState()
   useEffect(() => {
     const socketConection = io("http://localhost:3002", { transports : ['websocket']})
     setSocket(socketConection)
 
+    console.log(socket)
     return () => {
       socketConection.disconnect()
     }
   }, [])
 
+  useEffect(() => {
+    if (!socket) return
 
-  u
-
-  useEffect(()=>{
-    if(!socket) return 
-    const socketC = setInterval(() => {
-      socket.disconnect()
-    }, 2000)
-
-    return () => {
-      clearInterval( socketC )
-    }
+    socket.once('receive-changes', newData => {
+      console.log(newData)
+    })
   }, [socket])
 
   useEffect(() => {
@@ -31,12 +28,32 @@ export default function MinEditor() {
     socket.once('load-chat', chat => {
       console.log(chat)
     })
-
-    socket.emit('find-chat', ["steven", "peter"])
+    const obj = {
+      item: "1223",
+      owner: "1111",
+      renter: "rrr"
+    }
+    socket.emit('find-chat', obj)
   }, [socket])
   
-  return <div>
+  const handleSubmit = (e) =>{
+    e.preventDefault()
 
-    "save to stash"
+    socket.emit('send-msg', "box")
+
+    console.log('ok')
+    
+
+
+  }
+  return <div>
+    <form onSubmit={handleSubmit}>
+      <input type="text"
+      value={box} 
+      onChange={(e)=> {setBox(e.target.value)}}/>
+      <button> send</button>
+    </form>
   </div>
 }
+
+// chat is a struggle
