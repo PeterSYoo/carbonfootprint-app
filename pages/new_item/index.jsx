@@ -1,6 +1,5 @@
 import  { useState } from 'react';
 import { NewItemComponent } from '../../components/NewItemComponent.component';
-import urlHelper from '../../lib/urlHelper';
 export default function Upload() {
   const [fileInputState, setFileInputState] = useState("");
   const [fileInputState2, setFileInputState2] = useState("")
@@ -39,7 +38,7 @@ export default function Upload() {
   const newItempAPIcall = async () =>{
     const r = {...newItem, photos: imgs}
     try {
-      const request = await fetch(`${urlHelper}/api/clothes`, {
+      const request = await fetch(`http://localhost:3000/api/clothes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
