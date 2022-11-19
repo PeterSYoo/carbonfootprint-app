@@ -12,6 +12,29 @@ export default function Upload() {
   const [selectedFile2, setSelectedFile2] = useState("");
   const [selectedFile3, setSelectedFile3] = useState("");
   const [imgs, setImgs] = useState([])
+  const [newItem, setNewItem] = useState({
+    user: "6376ac9715b4440ede02092a",
+    color: "",
+    size: "",
+    occasion: "",
+    photos: [],
+    article: "",
+    available: true,
+    price: 100,
+    description: "",
+    name: ""
+  })
+
+  const handleChange = (e) => {
+    const {name, value } = e.target;
+    setNewItem(prev => {
+      return {
+          ...prev,
+          [name]: value
+      }
+    })
+  }
+  
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
@@ -109,6 +132,7 @@ const handleFileInputChange3 = (e) => {
   return (
       <div>
         <NewItemComponent
+        handleChange={handleChange}
         handleSubmitFile={handleSubmitFile}
         handleFileInputChange={handleFileInputChange}
         fileInputState={fileInputState}
@@ -116,6 +140,7 @@ const handleFileInputChange3 = (e) => {
         fileInputState2={fileInputState2}
         handleFileInputChange3={handleFileInputChange3}
         fileInputState3={fileInputState3}
+        newItem={newItem}
         />
           <h1 className="title">Upload an Image</h1>
           {previewSource && (

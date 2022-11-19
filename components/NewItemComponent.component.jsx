@@ -1,7 +1,4 @@
-import React from 'react'
-
-export const NewItemComponent = ({handleSubmitFile,
-  handleFileInputChange, fileInputState, handleFileInputChange2, fileInputState2, handleFileInputChange3, fileInputState3}) => {
+export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileInputState, handleFileInputChange2, fileInputState2, handleFileInputChange3, fileInputState3}) => {
   return (
     <div>
     <form onSubmit={handleSubmitFile} className="form">
