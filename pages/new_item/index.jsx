@@ -1,6 +1,6 @@
 import  { useState } from 'react';
 import { NewItemComponent } from '../../components/NewItemComponent.component';
-
+import urlHelper from '../../lib/urlHelper';
 export default function Upload() {
   const [fileInputState, setFileInputState] = useState("");
   const [fileInputState2, setFileInputState2] = useState("")
@@ -36,7 +36,25 @@ export default function Upload() {
       }
     })
   }
-  
+  const newItempAPIcall = async () =>{
+    const r = {...newItem, photos: imgs}
+    try {
+      const request = await fetch(`${urlHelper}/api/clothes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': localStorage.getItem('token'),
+        },
+        body: JSON.stringify(r),
+    })
+    const res = await request.json()
+    console.log(res)
+    } catch (error) {
+      
+    }
+  }
+
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
@@ -96,6 +114,7 @@ const handleFileInputChange3 = (e) => {
     uploadImage(selectedFile);
     uploadImage(selectedFile2)
     uploadImage(selectedFile3)
+    newItempAPIcall()
 
     reader.onerror = () => {
         console.error('error');
