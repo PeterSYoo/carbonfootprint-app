@@ -20,13 +20,15 @@ export default function Upload() {
     photos: [],
     article: "",
     available: true,
-    price: 100,
+    price: "",
     description: "",
     name: ""
   })
 
   const handleChange = (e) => {
     const {name, value } = e.target;
+    console.log(value, newItem.occasion)
+    console.log(newItem.occasion, "here")
     setNewItem(prev => {
       return {
           ...prev,
