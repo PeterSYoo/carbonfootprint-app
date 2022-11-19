@@ -10,6 +10,7 @@ import {
 import { Header } from '../components/Header.components';
 import { LoadingSpinner } from '../components/LoadingSpinner.components';
 import '../styles/globals.css';
+import { Footer } from '../components/Footer.components';
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ function MyApp({ Component, pageProps }) {
                 <ThemeProvider enableSystem={true} attribute="class">
                   <Header />
                   <Component {...pageProps} />
+                  <Footer />
                 </ThemeProvider>
               </SessionProvider>
             </Hydrate>
