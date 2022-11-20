@@ -2,14 +2,14 @@ import  { useState } from 'react';
 import { NewItemComponent } from '../../components/NewItemComponent.component';
 export default function Upload() {
   const [fileInputState, setFileInputState] = useState("");
-  const [fileInputState2, setFileInputState2] = useState("")
-  const [fileInputState3, setFileInputState3] = useState("")
+  // const [fileInputState2, setFileInputState2] = useState("")
+  // const [fileInputState3, setFileInputState3] = useState("")
   const [previewSource, setPreviewSource] = useState("");
-  const [previewSource2, setPreviewSource2] = useState("");
-  const [previewSource3, setPreviewSource3] = useState("");
+  // const [previewSource2, setPreviewSource2] = useState("");
+  // const [previewSource3, setPreviewSource3] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
-  const [selectedFile2, setSelectedFile2] = useState("");
-  const [selectedFile3, setSelectedFile3] = useState("");
+  // const [selectedFile2, setSelectedFile2] = useState("");
+  // const [selectedFile3, setSelectedFile3] = useState("");
   const [imgs, setImgs] = useState([])
   const [newItem, setNewItem] = useState({
     user: "6376ac9715b4440ede02092a",
@@ -37,34 +37,19 @@ export default function Upload() {
   
 
   const newItempAPIcall = async () =>{
-    const uploadImage = async (file) => {
+    try {
+
       const data = new FormData()
-          data.append('file', file)
-          data.append('upload_preset', 'eco-app')
-      try {
-        const imageUpload = await fetch('https://api.cloudinary.com/v1_1/dkmbw4f6d/image/upload', {
+      data.append('file', file)
+      data.append('upload_preset', 'eco-app')
+
+      const imageUpload = await fetch('https://api.cloudinary.com/v1_1/dkmbw4f6d/image/upload', {
           method: "POST",
           body: data
       })
       const parsedImg = await imageUpload.json()
-      console.log(parsedImg)
-  
-      setImgs([...imgs, parsedImg.url])
-      console.log(imgs)
-      } catch (err) {
-          console.error(err);
-      }
-  };
+      newItem.photos = [parsedImg.url]
 
-
-    
-    uploadImage(selectedFile)
-    uploadImage(selectedFile2)
-    uploadImage(selectedFile3)
-    console.log("asas")
-    newItem.photos = imgs
-    newItem
-    try {
       const request = await fetch(`http://localhost:3000/api/clothes`, {
         method: 'POST',
         headers: {
@@ -75,11 +60,11 @@ export default function Upload() {
     const res = await request.json()
     if (res.status !== 404){
         setFileInputState('');
-        setFileInputState2('');
-        setFileInputState3('');
+        // setFileInputState2('');
+        // setFileInputState3('');
         setPreviewSource('');
-        setSelectedFile2('')
-        setPreviewSource3('');
+        // setSelectedFile2('')
+        // setPreviewSource3('');
         setNewItem({
           user: "6376ac9715b4440ede02092a",
           color: "",
@@ -109,21 +94,21 @@ export default function Upload() {
 
   };
 
-  const handleFileInputChange2 = (e) => {
-    const file = e.target.files[0];
-    previewFile2(file);
-    setSelectedFile2(file)
-    setFileInputState2(e.target.value);
+//   const handleFileInputChange2 = (e) => {
+//     const file = e.target.files[0];
+//     previewFile2(file);
+//     setSelectedFile2(file)
+//     setFileInputState2(e.target.value);
 
-};
+// };
 
-const handleFileInputChange3 = (e) => {
-  const file = e.target.files[0];
-  previewFile3(file);
-  setSelectedFile3(file)
-  setFileInputState3(e.target.value);
+// const handleFileInputChange3 = (e) => {
+//   const file = e.target.files[0];
+//   previewFile3(file);
+//   setSelectedFile3(file)
+//   setFileInputState3(e.target.value);
   
-};
+// };
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -133,27 +118,27 @@ const handleFileInputChange3 = (e) => {
     };
   };
 
-  const previewFile2 = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource2(reader.result);
-    };
-  };
+  // const previewFile2 = (file) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     setPreviewSource2(reader.result);
+  //   };
+  // };
 
-  const previewFile3 = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource3(reader.result);
-    };
-  };
+  // const previewFile3 = (file) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     setPreviewSource3(reader.result);
+  //   };
+  // };
 
 
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
-    if (!selectedFile || !selectedFile2 || !selectedFile3) return;
+    if (!selectedFile) return;
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = () => {
@@ -177,10 +162,10 @@ const handleFileInputChange3 = (e) => {
         handleSubmitFile={handleSubmitFile}
         handleFileInputChange={handleFileInputChange}
         fileInputState={fileInputState}
-        handleFileInputChange2={handleFileInputChange2}
-        fileInputState2={fileInputState2}
-        handleFileInputChange3={handleFileInputChange3}
-        fileInputState3={fileInputState3}
+        // handleFileInputChange2={handleFileInputChange2}
+        // fileInputState2={fileInputState2}
+        // handleFileInputChange3={handleFileInputChange3}
+        // fileInputState3={fileInputState3}
         newItem={newItem}
         />
           <h1 className="title">Upload an Image</h1>
@@ -189,21 +174,6 @@ const handleFileInputChange3 = (e) => {
                   src={previewSource}
                   alt="chosen"
                   className='mb-8 mt-8 h-52'
-              />
-          )}
-
-          {previewSource2 && (
-              <img
-                  src={previewSource2}
-                  alt="chosen 2"
-                  className='mt-8 h-52'
-              />
-          )}
-          {previewSource3 && (
-              <img
-                  src={previewSource3}
-                  alt="chosen 2"
-                  className='mt-8 h-52'
               />
           )}
       </div>

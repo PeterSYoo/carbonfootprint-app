@@ -1,4 +1,4 @@
-export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileInputState, handleFileInputChange2, fileInputState2, handleFileInputChange3, fileInputState3, handleChange, newItem}) => {
+export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileInputState, handleChange, newItem}) => {
   return (
     <div>
     <form onSubmit={handleSubmitFile} className="form">
@@ -11,7 +11,7 @@ export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileI
         onChange={handleFileInputChange}
         value={fileInputState}
         />
-        <br/> 
+        {/* <br/> 
         <label htmlFor="image2"> back pick</label>               
         <input
           accept="image/png, image/jpeg"
@@ -28,7 +28,7 @@ export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileI
           name="image3"
           onChange={handleFileInputChange3}
           value={fileInputState3}
-        />
+        /> */}
         <br />
         <input type="text"
         name="color"
