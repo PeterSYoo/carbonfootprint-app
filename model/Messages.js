@@ -1,6 +1,6 @@
 import { Schema, model, models, SchemaTypes } from 'mongoose';
 
-const messageSchema = new Schema({
+const messagesSchema = new Schema({
   sender: {
     type: SchemaTypes.ObjectId,
     ref: 'User',
@@ -19,7 +19,7 @@ const messageSchema = new Schema({
 });
 
 
-const Message  = models.message || model('message', messageSchema );
+const Messages  = models.message || model('messages', messagesSchema );
 
 
 
