@@ -1,9 +1,7 @@
 export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileInputState, handleChange, newItem}) => {
   return (
     <div>
-    <form onSubmit={handleSubmitFile} className="form">
-      <h3>Make sure you do not select the same image more than once otherwise you will not be able to upload the pictures</h3>
-      <label htmlFor="image1"> front pick</label>               
+    <form onSubmit={handleSubmitFile} className="grid gap-2">            
         <input
         accept="image/png, image/jpeg"
         type="file"
@@ -29,41 +27,55 @@ export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileI
           onChange={handleFileInputChange3}
           value={fileInputState3}
         /> */}
-        <br />
-        <input type="text"
-        name="color"
-        value={newItem.color}
-        placeholder="color"
-        onChange={handleChange}/>
-        <br />
-        <input
+        <input 
+        className="border border-black rounded-md p-1"
         type="text"
-        name="size"
-        placeholder="size"
-        value={newItem.size}
+        name="name"
+        value={newItem.name}
+        placeholder="Item Name"
         onChange={handleChange}/>
-        <br />
         <input
-        type="text"
-        name="occasion"
-        placeholder="occasion"
-        value={newItem.occasion}
-        onChange={handleChange}/>
-        <br />
-        <input
+        className="border border-black rounded-md p-1"
         type="number"
         name="price"
-        placeholder="price"
+        placeholder="Rental Price"
         value={newItem.price}
         onChange={handleChange}/>
-        <br />
-        <textarea name="description" id="" cols="30" rows="10"
+        <textarea name="description" id="" cols="30" rows="3"
+        className="border border-black rounded-md p-1"
         value={newItem.description}
         onChange={handleChange}
-        placeholder="description"
+        placeholder="Description"
         />
-        <button type="submit">
-            Submit
+        <input type="text"
+        className="border border-black rounded-md p-1"
+        name="color"
+        value={newItem.color}
+        placeholder="Color"
+        onChange={handleChange}/>
+        <input
+        className="border border-black rounded-md p-1"
+        type="text"
+        name="size"
+        placeholder="Size"
+        value={newItem.size}
+        onChange={handleChange}/>
+        <input
+        className="border border-black rounded-md p-1"
+        type="text"
+        name="occasion"
+        placeholder="Category"
+        value={newItem.occasion}
+        onChange={handleChange}/>
+        <input
+        className="border border-black rounded-md p-1"
+        type="text"
+        name="Brand"
+        placeholder="Brand"
+        value={newItem.brand}
+        onChange={handleChange}/>
+        <button type="submit" className=" font-bold w-full border border-black rounded-md py-4 mb-32">
+            Share Your Clothes
         </button>
     </form>
     </div>

@@ -10,7 +10,6 @@ export default function Upload() {
   const [selectedFile, setSelectedFile] = useState("");
   // const [selectedFile2, setSelectedFile2] = useState("");
   // const [selectedFile3, setSelectedFile3] = useState("");
-  const [imgs, setImgs] = useState([])
   const [newItem, setNewItem] = useState({
     user: "6376ac9715b4440ede02092a",
     color: "",
@@ -40,7 +39,7 @@ export default function Upload() {
     try {
 
       const data = new FormData()
-      data.append('file', file)
+      data.append('file', selectedFile)
       data.append('upload_preset', 'eco-app')
 
       const imageUpload = await fetch('https://api.cloudinary.com/v1_1/dkmbw4f6d/image/upload', {
@@ -58,6 +57,7 @@ export default function Upload() {
         body: JSON.stringify(newItem),
     })
     const res = await request.json()
+    console.log(newItem, res)
     if (res.status !== 404){
         setFileInputState('');
         // setFileInputState2('');
@@ -75,12 +75,13 @@ export default function Upload() {
           available: true,
           price: "",
           description: "",
-          name: ""
+          name: "",
+          brand: ""
         })
-        setImgs([])
     }
     console.log(res, "")
     } catch (error) {
+      console.log(error)
       
     }
   }
@@ -156,7 +157,17 @@ export default function Upload() {
 
   
   return (
-      <div>
+      <div className='flex flex-col w-5/6 mx-auto'>
+        {!!previewSource ? <img
+                  src={previewSource}
+                  alt="chosen"
+                  className=' bg-gray-300 w-80 h-80 my-8 mx-auto '
+              />
+           : 
+           <div className='bg-gray-300 w-80 h-80  my-8 mx-auto'>
+
+           </div>
+            }
         <NewItemComponent
         handleChange={handleChange}
         handleSubmitFile={handleSubmitFile}
@@ -168,14 +179,6 @@ export default function Upload() {
         // fileInputState3={fileInputState3}
         newItem={newItem}
         />
-          <h1 className="title">Upload an Image</h1>
-          {previewSource && (
-              <img
-                  src={previewSource}
-                  alt="chosen"
-                  className='mb-8 mt-8 h-52'
-              />
-          )}
       </div>
   );
 }
