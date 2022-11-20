@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { unstable_getServerSession } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 import { deleteClothe } from '../../lib/clothesHelper';
@@ -11,6 +12,7 @@ import { authOptions } from '../api/auth/[...nextauth]';
 
 const ProfilePage = () => {
   const [hydrated, setHydrated] = useState(false);
+  const router = useRouter();
 
   const queryClient = useQueryClient();
   const { data: session } = useSession();
@@ -31,11 +33,17 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
+    if (!session) {
+      router.push('/');
+    }
+  });
+
+  useEffect(() => {
     setHydrated(true);
   }, []);
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return error;
+  if (isError) return 'error';
 
   if (!hydrated) {
     return null;
@@ -53,8 +61,8 @@ const ProfilePage = () => {
             />
           </div>
           <div className="mt-10 flex flex-col mx-auto">
-            <h1 className="text-3xl font-bold">@{data.username}</h1>
-            <p className="text-sm mt-2">Your Closet</p>
+            <h1 className="text-3xl font-bold text-center">@{data.username}</h1>
+            <p className="text-sm mt-2 text-center">Your Closet</p>
           </div>
           <div className="grid grid-cols-2 mt-10 gap-4">
             {userItems?.map((item) => (
