@@ -18,9 +18,6 @@ export default async function usersApi(req, res) {
     case 'POST':
       createMessage(req, res);
       break;
-    case 'DELETE':
-      deleteMessages(req, res);
-      break;
     default:
       res.setHeader('Allow', ['GET', "PUT", "POST"]);
       res.status(405).end(`Method ${method} Not Allowed`);
