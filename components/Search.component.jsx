@@ -2,37 +2,8 @@ import {useState} from 'react'
 import Link from 'next/link';
 
 
-export const Search = ({data}) => {
-  const [foundItems, setFoundItems] =useState([])
-  const [showSearch, setShowSearch] = useState(false)
-  const [inputS, setInputS] = useState('')
-  const [searchBy, setSearchBy] = useState('name')
-  const [sortValue, setSortValue]= useState('name')
-
-  const searchFunction = (prop, str) => {
-    const found = data.filter((item)=>item[prop].toUpperCase().includes(str.toUpperCase())) 
-    setFoundItems(found)
-  }
+export const Search = ({inputS, searchBy, sortValue, sortResults, handleSearch , setSortValue , setInputS,setSearchBy}) => {
   
-  let handleSearch = (val, str) => {
-    if (str === "") {
-      return
-    } else {
-        setShowSearch(true)
-    }
-    searchFunction(val, str)
-  }
-
-  const sortResults = (field) => {
-    if(showSearch){
-      const res = foundItems.sort((a,b)=>(a[field] >= b[field]) ? 1 : -1)
-      setFoundItems(res)
-    } else {
-      let sortedRes = [...data]
-      sortedRes = sortedRes.sort((a, b)=>(a[field] >= b[field]) ? 1 : -1)
-      setFoundItems(sortedRes)
-    }
-  }
   return (
     <div>
       <form className="" onSubmit={(e)=>{e.preventDefault(e);handleSearch(searchBy, inputS) }}>
