@@ -25,9 +25,7 @@ export default function Upload() {
   })
 
   const handleChange = (e) => {
-    const {name, value } = e.target;
-    console.log(value, newItem.occasion)
-    console.log(newItem.occasion, "here")
+    const {name, value } = e.target; 
     setNewItem(prev => {
       return {
           ...prev,
@@ -35,19 +33,68 @@ export default function Upload() {
       }
     })
   }
+
+  
+
   const newItempAPIcall = async () =>{
-    const r = {...newItem, photos: imgs}
+    const uploadImage = async (file) => {
+      const data = new FormData()
+          data.append('file', file)
+          data.append('upload_preset', 'eco-app')
+      try {
+        const imageUpload = await fetch('https://api.cloudinary.com/v1_1/dkmbw4f6d/image/upload', {
+          method: "POST",
+          body: data
+      })
+      const parsedImg = await imageUpload.json()
+      console.log(parsedImg)
+  
+      setImgs([...imgs, parsedImg.url])
+      console.log(imgs)
+      } catch (err) {
+          console.error(err);
+      }
+  };
+
+
+    
+    uploadImage(selectedFile)
+    uploadImage(selectedFile2)
+    uploadImage(selectedFile3)
+    console.log("asas")
+    newItem.photos = imgs
+    newItem
     try {
       const request = await fetch(`http://localhost:3000/api/clothes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': localStorage.getItem('token'),
         },
-        body: JSON.stringify(r),
+        body: JSON.stringify(newItem),
     })
     const res = await request.json()
-    console.log(res)
+    if (res.status !== 404){
+        setFileInputState('');
+        setFileInputState2('');
+        setFileInputState3('');
+        setPreviewSource('');
+        setSelectedFile2('')
+        setPreviewSource3('');
+        setNewItem({
+          user: "6376ac9715b4440ede02092a",
+          color: "",
+          size: "",
+          occasion: "",
+          photos: [],
+          article: "",
+          available: true,
+          price: "",
+          description: "",
+          name: ""
+        })
+        setImgs([])
+    }
+    console.log(res, "")
     } catch (error) {
       
     }
@@ -59,6 +106,7 @@ export default function Upload() {
     previewFile(file);
     setSelectedFile(file);
     setFileInputState(e.target.value);
+
   };
 
   const handleFileInputChange2 = (e) => {
@@ -74,7 +122,7 @@ const handleFileInputChange3 = (e) => {
   previewFile3(file);
   setSelectedFile3(file)
   setFileInputState3(e.target.value);
-
+  
 };
 
   const previewFile = (file) => {
@@ -110,9 +158,10 @@ const handleFileInputChange3 = (e) => {
     reader.readAsDataURL(selectedFile);
     reader.onloadend = () => {
     };
-    uploadImage(selectedFile);
-    uploadImage(selectedFile2)
-    uploadImage(selectedFile3)
+    
+
+   
+    
     newItempAPIcall()
 
     reader.onerror = () => {
@@ -120,35 +169,7 @@ const handleFileInputChange3 = (e) => {
     };
   };
 
-  const uploadImage = async (file) => {
-      const data = new FormData()
-          console.log("image prop", file)
-          data.append('file', file)
-          data.append('upload_preset', 'eco-app')
-      try {
-        const imageUpload = await fetch('https://api.cloudinary.com/v1_1/dkmbw4f6d/image/upload', {
-          method: "POST",
-          body: data
-      })
-      const parsedImg = await imageUpload.json()
-
-      setImgs([...imgs, parsedImg.url])
-      console.log(parsedImg)
-          setFileInputState('');
-          setFileInputState2('');
-          setFileInputState3('');
-          setPreviewSource('');
-          setSelectedFile2('')
-          setPreviewSource3('');
-      } catch (err) {
-          console.error(err);
-      }
-      
-    console.log(imgs)
-
-    
-      
-  };
+  
   return (
       <div>
         <NewItemComponent

@@ -13,7 +13,8 @@ const clothesSchema = new Schema({
   artcile: String,
   available: Boolean,
   description: String,
-  price: Number
+  price: Number,
+  brand: String
 });
 
 
