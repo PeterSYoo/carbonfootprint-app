@@ -1,4 +1,5 @@
 import  { useState } from 'react';
+import Router from 'next/router';
 import { NewItemComponent } from '../../components/NewItemComponent.component';
 export default function Upload() {
   const [fileInputState, setFileInputState] = useState("");
@@ -78,6 +79,7 @@ export default function Upload() {
           name: "",
           brand: ""
         })
+        Router.push('/profile')
     }
     console.log(res, "")
     } catch (error) {
