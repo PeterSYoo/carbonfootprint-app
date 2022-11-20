@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { ThemeButton } from './ThemeButton.components';
+import Image from 'next/image';
 
 export const Header = () => {
   const router = useRouter();
@@ -14,12 +14,13 @@ export const Header = () => {
 
   return (
     <>
-      <div className="flex flex-col bg-gray-300 pt-16 items-center">
-        <div className="mb-2">
-          <ThemeButton />
-        </div>
+      <div className="flex flex-col bg-teal pt-16 items-center">
         <Link href="/">
-          <h1 className="text-3xl font-bold mb-3">Our Closet</h1>
+          <Image
+            src="https://i.imgur.com/NO3xCzW.png"
+            width={214}
+            height={30}
+          />
         </Link>
         {session ? (
           <button onClick={handleSignout}>Logout</button>
