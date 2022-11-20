@@ -15,13 +15,13 @@ const messagesSchema = new Schema({
   }, 
   returnDate: String,
   message: String,
-  returnDate: String
+  checkoutDate: String
 });
 
 
-const Messages  = models.message || model('messages', messagesSchema );
+const Messages  = models.messages || model('messages', messagesSchema );
 
 
 
 
-export default Clothes;
+export default Messages;
