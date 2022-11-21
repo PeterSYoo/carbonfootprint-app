@@ -45,17 +45,17 @@ function MyApp({ Component, pageProps }) {
         </>
       ) : (
         <>
-          <QueryClientProvider client={queryClient}>
-            <Hydrate state={pageProps.dehydratedState}>
-              <SessionProvider session={pageProps.session}>
+          <SessionProvider session={pageProps.session}>
+            <QueryClientProvider client={queryClient}>
+              <Hydrate state={pageProps.dehydratedState}>
                 <ThemeProvider enableSystem={true} attribute="class">
                   <Header />
                   <Component {...pageProps} />
                   <Footer />
                 </ThemeProvider>
-              </SessionProvider>
-            </Hydrate>
-          </QueryClientProvider>
+              </Hydrate>
+            </QueryClientProvider>
+          </SessionProvider>
         </>
       )}
     </>
