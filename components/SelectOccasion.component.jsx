@@ -1,6 +1,6 @@
 export const SelectOccasion = ({handleChange, newItem}) => {
   return (
-    <select className="border border-black rounded-md p-1" name="size" value={newItem.occasion} onChange={(e)=> handleChange(e)}>
+    <select className="border border-black rounded-md p-1" name="occasion" value={newItem.occasion} onChange={(e)=> handleChange(e)}>
       <option value="" disabled> Category</option>
       <option value="Activewear">Activewear</option>
       <option value="Blazer">Blazer</option>
