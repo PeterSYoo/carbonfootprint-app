@@ -1,6 +1,6 @@
 export const SelectColor = ({handleChange, newItem}) => {
   return (
-    <select className="border border-black rounded-md p-1" name="size" value={newItem.color} onChange={(e)=> handleChange(e)}>
+    <select className="border border-black rounded-md p-1" name="color" value={newItem.color} onChange={(e)=> handleChange(e)}>
       <option value="" disabled> Color</option>
       <option value="Black">Black</option>
       <option value="White">White</option>
