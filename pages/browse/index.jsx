@@ -5,7 +5,6 @@ import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 import { getClothes } from '../../lib/clothesHelper';
 import { getSession } from 'next-auth/react';
 import { SearchMenu } from '../../components/SearchMenu.component';
-import Image from 'next/image';
 
 
 const BrowsePage = () => {
@@ -15,9 +14,7 @@ const BrowsePage = () => {
 
   const [foundItems, setFoundItems] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
-  const [inputS, setInputS] = useState('');
   const [searchBy, setSearchBy] = useState('name');
-  const [sortValue, setSortValue] = useState('name');
   const [showModal, setShowModal] = useState(false)
 
 
@@ -34,10 +31,6 @@ const BrowsePage = () => {
     }
   }
   const searchFunction = (prop, str) => {
-
-    if (str === ""){
-      return (setFoundItems(data))
-    }
     const found = data.filter((item) =>
       item[prop].toUpperCase().includes(str.toUpperCase())
     );
@@ -45,23 +38,13 @@ const BrowsePage = () => {
   };
 
   let handleSearch = (prop, val) => {
-    if (val === '') {
+    if (val === '' || !prop) {
+      setFoundItems(data)
       return;
     } else {
       setShowSearch(true);
     }
     searchFunction(prop, val);
-  };
-
-  const sortResults = (field) => {
-    if (showSearch) {
-      const res = foundItems.sort((a, b) => (a[field] >= b[field] ? 1 : -1));
-      setFoundItems(res);
-    } else {
-      let sortedRes = [...data];
-      sortedRes = sortedRes.sort((a, b) => (a[field] >= b[field] ? 1 : -1));
-      setFoundItems(sortedRes);
-    }
   };
 
   if (isLoading) return <LoadingSpinner />;

@@ -32,7 +32,7 @@ const ItemsIdPage = ({ clothesId }) => {
     <>
       <form onSubmit={formik.handleSubmit}>
         <div className="flex flex-col w-5/6 mx-auto">
-          <img alt={data?.description} src={data?.photos[0]} className="mt-4 bg-gray-300 h-48" />
+          <img alt={data?.description} src={data?.photos[0]} className="mt-4 mx-auto inline-block bg-gray-300 w-48" />
           
           <div className="flex justify-between mt-4">
             <div className="">{data?.name}</div>

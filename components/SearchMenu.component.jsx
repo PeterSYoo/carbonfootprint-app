@@ -14,10 +14,10 @@ export const SearchMenu = ({ handleSearch, searchByPrice, showModal, setShowModa
 
   const handleNameChange = (e) =>{
     setSearchS(e.currentTarget.value)
-    if (e.currentTarget.value ){
-      handleSearch("", serachS)
-    }else{
+    if (e.currentTarget.value){
       handleSearch("name", serachS)
+    }else{
+      handleSearch("name", "")
     }
   }
 
