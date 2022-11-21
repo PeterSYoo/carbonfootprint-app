@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useRef} from 'react'
 import { MenuItem } from './MenuItem.component'
 
 export const SearchMenu = ({ handleSearch, searchByPrice}) => {
@@ -15,15 +15,19 @@ export const SearchMenu = ({ handleSearch, searchByPrice}) => {
 
   const handleNameChange = (e) =>{
     setSearchS(e.currentTarget.value)
-    handleSearch("name", serachS)
+    if (e.currentTarget.value ){
+      handleSearch("", serachS)
+    }else{
+      handleSearch("name", serachS)
+    }
   }
 
   return (
-    <div className={`${showModal ? "show-sometimes overflow-y-hidden" : "hidesometimes overflow-y-hidden" } text-lg my-16 bg-amber-100 rounded-t-3xl`}>
-      <div className='p-2 pt-6 pl-6 rounded-t-3xl border border-black'>
-        <input type="text" value={serachS} onChange={(e)=>{handleNameChange(e)}} className='w-5/6 border border-black rounded-2xl p-1 focus:outline-none'/>
-        { showModal ? <button className='ml-4 select-none' onClick={()=>setShowModal(false)}>X</button> :
-        <button className='ml-4 select-none' onClick={()=>setShowModal(!showModal)}>&#8593;</button>}
+    <div className={`${showModal ? "show-sometimes overflow-y-hidden" : "hidesometimes overflow-y-hidden" } text-lg my-16 bg-beige rounded-t-3xl`}>
+      <div className='p-2 pt-5 pl-6 rounded-t-3xl border border-black'>
+        <input type="text" value={serachS} onClick={()=>setShowModal(true)} onChange={(e)=>{handleNameChange(e)}} className='w-5/6 border border-black rounded-2xl focus:outline-none'/>
+        { showModal ? <button className='ml-4 select-none' onClick={()=>setShowModal(false)}> &#8593;</button> :
+        <button className='ml-4 select-none' onClick={()=>setShowModal(!showModal)}> <img className="w-9 -mb-3" src="https://i.ibb.co/0svzzdD/no-bg.png"/></button>}
       </div>
       <div className={showModal ? "slide-menu overflow-y-scroll" : "hide-menu"}>
         <div className='px-6'>
