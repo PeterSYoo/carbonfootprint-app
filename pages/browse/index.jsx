@@ -22,22 +22,20 @@ const BrowsePage = () => {
     setFoundItems(data);
   }, [data]);
   const searchFunction = (prop, str) => {
+    console.log(prop)
     const found = data.filter((item) =>
       item[prop].toUpperCase().includes(str.toUpperCase())
     );
-    console.table(found);
-    console.table(data);
-    console.log(data);
     setFoundItems(found);
   };
 
-  let handleSearch = (val, str) => {
-    if (str === '') {
+  let handleSearch = (prop, val) => {
+    if (val === '') {
       return;
     } else {
       setShowSearch(true);
     }
-    searchFunction(val, str);
+    searchFunction(prop, val);
   };
 
   const sortResults = (field) => {
