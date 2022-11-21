@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
 import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 import { getClothes } from '../../lib/clothesHelper';
-import { Search } from '../../components/Search.component';
 import { getSession } from 'next-auth/react';
 import { SearchMenu } from '../../components/SearchMenu.component';
 
