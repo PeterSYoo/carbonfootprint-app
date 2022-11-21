@@ -31,19 +31,10 @@ export default function Upload({ session }) {
     name: '',
   });
 
-  const { data, isLoading, isError, error } = useQuery(['user'], () =>
-    getUser(session.id)
-  );
-
-  if (isLoading) return <LoadingSpinner />;
-  if (isError) {
-    return <>Error {error.message}</>;
-  }
-
-  // console.log(data._id);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(session.id)
     setNewItem((prev) => {
       return {
         ...prev,
@@ -67,7 +58,7 @@ export default function Upload({ session }) {
       );
       const parsedImg = await imageUpload.json();
       newItem.photos = [parsedImg.url];
-      newItem.user = data._id;
+      newItem.user = session.id;
       const request = await fetch(`http://localhost:3000/api/clothes`, {
         method: 'POST',
         headers: {
