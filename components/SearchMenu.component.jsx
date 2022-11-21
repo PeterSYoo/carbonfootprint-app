@@ -15,6 +15,7 @@ export const SearchMenu = ({ handleSearch, searchByPrice}) => {
 
   const handleNameChange = (e) =>{
     setSearchS(e.currentTarget.value)
+    handleSearch("name", serachS)
   }
 
   return (
