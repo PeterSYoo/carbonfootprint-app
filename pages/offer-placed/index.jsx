@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import Link from 'next/link';
 
 const OfferPlacedPage = () => {
@@ -12,7 +13,9 @@ const OfferPlacedPage = () => {
             <button className="bg-gray-300 py-4 px-2">Back to browsing</button>
           </Link>
           <Link href="/">
-            <button className="bg-gray-300 py-4 px-2">Go to messages</button>
+            <button className="bg-gray-300 py-4 px-2 text-gray-400">
+              Go to messages
+            </button>
           </Link>
         </div>
       </div>
@@ -21,3 +24,18 @@ const OfferPlacedPage = () => {
 };
 
 export default OfferPlacedPage;
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
+
+  return { props: { session } };
+}

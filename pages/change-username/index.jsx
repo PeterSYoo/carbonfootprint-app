@@ -7,7 +7,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { usernameValidate } from '../../lib/usernameValidate';
 import { getUser, getUsers, updateUser } from '../../lib/usersHelper';
 import { authOptions } from '../api/auth/[...nextauth]';
-import { AiOutlineUser } from 'react-icons/ai';
 
 const ChangeUsernamePage = () => {
   const [hydrated, setHydrated] = useState(false);
@@ -63,17 +62,19 @@ const ChangeUsernamePage = () => {
       <>
         <form onSubmit={formik.handleSubmit}>
           <div className="flex flex-col">
-            <div className="mt-20 flex justify-center text-2xl w-5/6 mx-auto">
-              You are now signed in, choose your screen name!
+            <div className="mt-20 flex justify-center text-xl w-5/6 mx-auto text-center font-bold">
+              You are now signed in.
+              <br />
+              Now choose your screen name!
             </div>
+            <p className="w-1/2 mx-auto mt-16 font-bold text-sm">Screen Name</p>
             <div
               className={`${
                 formik.errors.username
-                  ? 'flex w-5/6 mx-auto mt-10 pl-2 items-center rounded-md border border-red-400 py-3 hover:border-red-600 dark:border-red-500 hover:dark:border-red-600'
-                  : 'flex w-5/6 mx-auto mt-10 pl-2 items-center rounded-md border border-gray-400 py-3 hover:border-black dark:border-gray-700 hover:dark:border-white'
+                  ? 'flex w-1/2 mx-auto mt-2 pl-1 items-center rounded-md border border-red-400 py-1 hover:border-red-600 dark:border-red-500 hover:dark:border-red-600'
+                  : 'flex w-1/2 mx-auto mt-2 pl-1 items-center rounded-md border border-gray-400 py-1 hover:border-black dark:border-gray-700 hover:dark:border-white'
               }`}
             >
-              <AiOutlineUser size={20} />
               <input
                 type="text"
                 className="w-full px-3 focus:outline-none dark:bg-black placeholder:text-gray-500"
@@ -86,7 +87,7 @@ const ChangeUsernamePage = () => {
                 value={formik.values.username}
               />
             </div>
-            <div className="w-5/6 mx-auto h-5">
+            <div className="w-1/2 mx-auto h-5">
               {formik.errors.username ? (
                 <span className="text-[10px] text-red-500 md:text-[12px]">
                   {formik.errors.username}
@@ -103,7 +104,7 @@ const ChangeUsernamePage = () => {
               ) : (
                 <button
                   type="submit"
-                  className="rounded-lg border border-white bg-black px-4 py-1 font-bold text-white hover:border-gray-300 hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:border dark:hover:border-gray-700 dark:hover:bg-black dark:hover:text-white"
+                  className="rounded-lg border border-black bg-teal px-10 py-4 font-bold text-white hover:border-gray-300 hover:bg-black hover:text-white"
                 >
                   Confirm
                 </button>

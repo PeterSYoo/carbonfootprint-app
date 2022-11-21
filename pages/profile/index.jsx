@@ -80,6 +80,11 @@ const ProfilePage = () => {
                 </div>
               </Fragment>
             ))}
+            <div className="flex flex-col">
+              <div className="bg-gray-300 h-36 flex justify-center items-center text-3xl">
+                +
+              </div>
+            </div>
           </div>
         </div>
       </>

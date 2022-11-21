@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { useFormik } from 'formik';
-import Router, { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import Router from 'next/router';
+import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 import { getClothe } from '../../lib/clothesHelper';
+import { itemValidate } from '../../lib/itemValidate';
 
 const ItemsIdPage = ({ clothesId }) => {
-  const { data } = useQuery(['item'], () => getClothe(clothesId));
+  const { data, isLoading, isError, error } = useQuery(['item'], () =>
+    getClothe(clothesId)
+  );
 
   const onSubmit = (values) => {
     console.log(values);
@@ -18,8 +21,12 @@ const ItemsIdPage = ({ clothesId }) => {
       returnDate: '',
       message: '',
     },
+    validate: itemValidate,
     onSubmit,
   });
+
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return error;
 
   return (
     <>
@@ -32,46 +39,100 @@ const ItemsIdPage = ({ clothesId }) => {
             <div className="">{data?.name}</div>
             <div className="">Rent: ${data?.price}</div>
           </div>
-          <div className="mt-4">
-            <div className="">Size: {data?.size}</div>
-            <div className="">Color: {data?.color}</div>
-            <div className="">Description: {data?.description}</div>
-            <div className="">Brand:</div>
+          <div className="mt-2 flex gap-4">
+            <span className="bg-gray-300 rounded-3xl px-2">{data?.size}</span>
+            <span className="bg-gray-300 rounded-3xl px-2">{data?.color}</span>
+            <span className="bg-gray-300 rounded-3xl px-2">
+              {data?.occasion}
+            </span>
           </div>
-          <div className="mt-10 flex gap-5">
-            <input
-              placeholder="Checkout date"
-              type="text"
-              className="border border-black w-1/2 px-2"
-              {...formik.getFieldProps('checkoutDate')}
-              name="checkoutDate"
-              onChange={formik.handleChange}
-              value={formik.values.checkoutDate}
-            />
-            <input
-              placeholder="Return date"
-              type="text"
-              className="border border-black w-1/2 px-2"
-              {...formik.getFieldProps('returnDate')}
-              name="returnDate"
-              onChange={formik.handleChange}
-              value={formik.values.returnDate}
-            />
+          <p className="text-xs mt-3">{data?.description}</p>
+          <div className="mt-10 flex gap-5 w-full">
+            <div className="flex flex-col w-1/2">
+              <p className="text-sm font-bold">Checkout date</p>
+              <input
+                placeholder="MM/DD/YYYY"
+                type="text"
+                className={
+                  formik.errors.checkoutDate
+                    ? 'border border-red-600 w-full px-2 py-2 rounded-lg focus:outline-none'
+                    : 'border border-black w-full px-2 py-2 rounded-lg focus:outline-none'
+                }
+                {...formik.getFieldProps('checkoutDate')}
+                name="checkoutDate"
+                onChange={formik.handleChange}
+                value={formik.values.checkoutDate}
+              />
+              {formik.errors.checkoutDate ? (
+                <span className="text-[10px] text-red-500 md:text-[12px]">
+                  {formik.errors.checkoutDate}
+                </span>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="flex flex-col w-1/2">
+              <p className="text-sm font-bold">Return date</p>
+              <input
+                placeholder="MM/DD/YYYY"
+                type="text"
+                className={
+                  formik.errors.returnDate
+                    ? 'border border-red-600 w-full px-2 py-2 rounded-lg focus:outline-none'
+                    : 'border border-black w-full px-2 py-2 rounded-lg focus:outline-none'
+                }
+                {...formik.getFieldProps('returnDate')}
+                name="returnDate"
+                onChange={formik.handleChange}
+                value={formik.values.returnDate}
+              />
+              {formik.errors.returnDate ? (
+                <span className="text-[10px] text-red-500 md:text-[12px]">
+                  {formik.errors.returnDate}
+                </span>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
           <div className="mt-4">
-            <textarea
-              placeholder="Message to the owner"
-              className="border border-black w-full p-2"
-              {...formik.getFieldProps('message')}
-              name="message"
-              onChange={formik.handleChange}
-              value={formik.values.message}
-            />
+            <div className="flex flex-col">
+              <p className="text-sm font-bold">Message to the owner</p>
+              <textarea
+                className={
+                  formik.errors.message
+                    ? 'border border-red-600 w-full px-2 py-2 rounded-lg focus:outline-none'
+                    : 'border border-black w-full px-2 py-2 rounded-lg focus:outline-none'
+                }
+                {...formik.getFieldProps('message')}
+                name="message"
+                onChange={formik.handleChange}
+                value={formik.values.message}
+              />
+              {formik.errors.message ? (
+                <span className="text-[10px] text-red-500 md:text-[12px]">
+                  {formik.errors.message}
+                </span>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
           <div className="mt-4">
-            <button type="submit" className="w-full bg-gray-300 py-4">
-              Place offer
-            </button>
+            {formik.errors.checkoutDate ||
+            formik.errors.returnDate ||
+            formik.errors.message ? (
+              <span className="flex justify-center w-full border border-gray-300 text-gray-300 rounded-lg py-4 font-bold">
+                Place offer
+              </span>
+            ) : (
+              <button
+                type="submit"
+                className="w-full border border-black rounded-lg py-4 font-bold"
+              >
+                Place offer
+              </button>
+            )}
           </div>
         </div>
       </form>
