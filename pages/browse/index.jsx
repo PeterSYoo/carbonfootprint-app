@@ -18,6 +18,8 @@ const BrowsePage = () => {
   const [inputS, setInputS] = useState('');
   const [searchBy, setSearchBy] = useState('name');
   const [sortValue, setSortValue] = useState('name');
+  const [showModal, setShowModal] = useState(false)
+
 
   useEffect(() => {
     setFoundItems(data);
@@ -32,6 +34,10 @@ const BrowsePage = () => {
     }
   }
   const searchFunction = (prop, str) => {
+
+    if (str === ""){
+      return (setFoundItems(data))
+    }
     const found = data.filter((item) =>
       item[prop].toUpperCase().includes(str.toUpperCase())
     );
@@ -81,14 +87,10 @@ const BrowsePage = () => {
       </div>
       <SearchMenu
         searchByPrice={searchByPrice}
-        inputS={inputS}
         searchBy={searchBy}
-        sortValue={sortValue}
-        sortResults={sortResults}
         handleSearch={handleSearch}
-        setSortValue={setSortValue}
-        setInputS={setInputS}
-        setSearchBy={setSearchBy}
+        setShowModal={setShowModal}
+        showModal={showModal}
         />
     </>
   );

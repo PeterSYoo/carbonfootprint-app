@@ -1,13 +1,12 @@
 import {useState, useRef} from 'react'
 import { MenuItem } from './MenuItem.component'
 
-export const SearchMenu = ({ handleSearch, searchByPrice}) => {
+export const SearchMenu = ({ handleSearch, searchByPrice, showModal, setShowModal}) => {
   const [price, setPrice] = useState(0)
   const [showCat, setShowCat] = useState(false)
   const [showCol, setShowCol] = useState(false)
   const [serachS, setSearchS] = useState('')
-  const [showModal, setShowModal] = useState(false)
-
+  
   const handleChange= (e) => {
     setPrice(e.currentTarget.value)
     searchByPrice(e.currentTarget.value)
