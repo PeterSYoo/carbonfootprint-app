@@ -5,6 +5,8 @@ import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 import { getClothes } from '../../lib/clothesHelper';
 import { getSession } from 'next-auth/react';
 import { SearchMenu } from '../../components/SearchMenu.component';
+import Image from 'next/image';
+
 
 const BrowsePage = () => {
   const { data, isLoading, isError, error } = useQuery(['clothes'], () =>
@@ -16,6 +18,8 @@ const BrowsePage = () => {
   const [inputS, setInputS] = useState('');
   const [searchBy, setSearchBy] = useState('name');
   const [sortValue, setSortValue] = useState('name');
+  const [showModal, setShowModal] = useState(false)
+
 
   useEffect(() => {
     setFoundItems(data);
@@ -30,6 +34,10 @@ const BrowsePage = () => {
     }
   }
   const searchFunction = (prop, str) => {
+
+    if (str === ""){
+      return (setFoundItems(data))
+    }
     const found = data.filter((item) =>
       item[prop].toUpperCase().includes(str.toUpperCase())
     );
@@ -66,7 +74,11 @@ const BrowsePage = () => {
           <Fragment key={clothes._id}>
             <div className="flex flex-col w-full">
               <Link href={`/browse/${clothes._id}`}>
-                <div className="bg-gray-300 h-36 rounded-xl"></div>
+                <img
+                src={clothes.photos[0]}
+                alt={clothes.description}
+                className="bg-gray-300 h-36 rounded-xl"
+                />
                 <div className="flex justify-center">{clothes.name}</div>
               </Link>
             </div>
@@ -75,14 +87,10 @@ const BrowsePage = () => {
       </div>
       <SearchMenu
         searchByPrice={searchByPrice}
-        inputS={inputS}
         searchBy={searchBy}
-        sortValue={sortValue}
-        sortResults={sortResults}
         handleSearch={handleSearch}
-        setSortValue={setSortValue}
-        setInputS={setInputS}
-        setSearchBy={setSearchBy}
+        setShowModal={setShowModal}
+        showModal={showModal}
         />
     </>
   );

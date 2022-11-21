@@ -10,14 +10,8 @@ import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 
 export default function Upload({ session }) {
   const [fileInputState, setFileInputState] = useState('');
-  // const [fileInputState2, setFileInputState2] = useState("")
-  // const [fileInputState3, setFileInputState3] = useState("")
   const [previewSource, setPreviewSource] = useState('');
-  // const [previewSource2, setPreviewSource2] = useState("");
-  // const [previewSource3, setPreviewSource3] = useState("");
   const [selectedFile, setSelectedFile] = useState('');
-  // const [selectedFile2, setSelectedFile2] = useState("");
-  // const [selectedFile3, setSelectedFile3] = useState("");
   const [newItem, setNewItem] = useState({
     user: '',
     color: '',
@@ -40,10 +34,10 @@ export default function Upload({ session }) {
     return <>Error {error.message}</>;
   }
 
-  // console.log(data._id);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(session.id)
     setNewItem((prev) => {
       return {
         ...prev,
@@ -67,7 +61,7 @@ export default function Upload({ session }) {
       );
       const parsedImg = await imageUpload.json();
       newItem.photos = [parsedImg.url];
-      newItem.user = data._id;
+      newItem.user = session.id;
       const request = await fetch(`http://localhost:3000/api/clothes`, {
         method: 'POST',
         headers: {
@@ -79,11 +73,7 @@ export default function Upload({ session }) {
       console.log(newItem, res);
       if (res.status !== 404) {
         setFileInputState('');
-        // setFileInputState2('');
-        // setFileInputState3('');
         setPreviewSource('');
-        // setSelectedFile2('')
-        // setPreviewSource3('');
         setNewItem({
           user: '',
           color: '',
@@ -112,22 +102,6 @@ export default function Upload({ session }) {
     setFileInputState(e.target.value);
   };
 
-  //   const handleFileInputChange2 = (e) => {
-  //     const file = e.target.files[0];
-  //     previewFile2(file);
-  //     setSelectedFile2(file)
-  //     setFileInputState2(e.target.value);
-
-  // };
-
-  // const handleFileInputChange3 = (e) => {
-  //   const file = e.target.files[0];
-  //   previewFile3(file);
-  //   setSelectedFile3(file)
-  //   setFileInputState3(e.target.value);
-
-  // };
-
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -135,22 +109,6 @@ export default function Upload({ session }) {
       setPreviewSource(reader.result);
     };
   };
-
-  // const previewFile2 = (file) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setPreviewSource2(reader.result);
-  //   };
-  // };
-
-  // const previewFile3 = (file) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setPreviewSource3(reader.result);
-  //   };
-  // };
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
@@ -182,10 +140,6 @@ export default function Upload({ session }) {
         handleSubmitFile={handleSubmitFile}
         handleFileInputChange={handleFileInputChange}
         fileInputState={fileInputState}
-        // handleFileInputChange2={handleFileInputChange2}
-        // fileInputState2={fileInputState2}
-        // handleFileInputChange3={handleFileInputChange3}
-        // fileInputState3={fileInputState3}
         newItem={newItem}
       />
     </div>

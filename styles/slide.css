@@ -11,7 +11,7 @@
 .show-sometimes {
   z-index: 10;
   position: fixed;
-  bottom: -8px;
+  bottom: -4px;
 
 }
 
@@ -28,7 +28,7 @@
 .hidesometimes{
   position: fixed;
   z-index: 10;
-  bottom: -8px;
+  bottom: -4px;
   width: 100vw;
 }
 

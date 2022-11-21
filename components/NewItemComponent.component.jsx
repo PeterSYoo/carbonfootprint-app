@@ -1,3 +1,6 @@
+import { SelectSize } from "./SelectSize.component"
+import { SelectColor } from "./SelectColor.component"
+import { SelectOccasion } from "./SelectOccasion.component"
 export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileInputState, handleChange, newItem}) => {
   return (
     <div>
@@ -47,33 +50,25 @@ export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileI
         onChange={handleChange}
         placeholder="Description"
         />
-        <input type="text"
-        className="border border-black rounded-md p-1"
-        name="color"
-        value={newItem.color}
-        placeholder="Color"
-        onChange={handleChange}/>
-        <input
-        className="border border-black rounded-md p-1"
-        type="text"
-        name="size"
-        placeholder="Size"
-        value={newItem.size}
-        onChange={handleChange}/>
-        <input
-        className="border border-black rounded-md p-1"
-        type="text"
-        name="occasion"
-        placeholder="Category"
-        value={newItem.occasion}
-        onChange={handleChange}/>
-        <input
+        <SelectColor
+        newItem={newItem}
+        handleChange={handleChange}
+        />
+        <SelectSize
+        newItem={newItem}
+        handleChange={handleChange}
+        />
+        <SelectOccasion
+        newItem={newItem}
+        handleChange={handleChange}
+        />
+        {/* <input
         className="border border-black rounded-md p-1"
         type="text"
         name="Brand"
         placeholder="Brand"
         value={newItem.brand}
-        onChange={handleChange}/>
+        onChange={handleChange}/> */}
         <button type="submit" className=" font-bold w-full border border-black rounded-md py-4 mb-32">
             Share Your Clothes
         </button>
