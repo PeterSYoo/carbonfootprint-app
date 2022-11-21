@@ -5,6 +5,8 @@ import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 import { getClothes } from '../../lib/clothesHelper';
 import { getSession } from 'next-auth/react';
 import { SearchMenu } from '../../components/SearchMenu.component';
+import Image from 'next/image';
+
 
 const BrowsePage = () => {
   const { data, isLoading, isError, error } = useQuery(['clothes'], () =>
@@ -66,7 +68,11 @@ const BrowsePage = () => {
           <Fragment key={clothes._id}>
             <div className="flex flex-col w-full">
               <Link href={`/browse/${clothes._id}`}>
-                <div className="bg-gray-300 h-36 rounded-xl"></div>
+                <img
+                src={clothes.photos[0]}
+                alt={clothes.description}
+                className="bg-gray-300 h-36 rounded-xl"
+                />
                 <div className="flex justify-center">{clothes.name}</div>
               </Link>
             </div>
