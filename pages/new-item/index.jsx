@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {clothe}
 import Router from 'next/router';
 import { NewItemComponent } from '../../components/NewItemComponent.component';
 import { getSession } from 'next-auth/react';
@@ -62,7 +63,7 @@ export default function Upload({ session }) {
       const parsedImg = await imageUpload.json();
       newItem.photos = [parsedImg.url];
       newItem.user = session.id;
-      const request = await fetch(`http://localhost:3000/api/clothes`, {
+      const request = await fetch(`https://carbonfootprint-app.vercel.app`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
