@@ -1,4 +1,5 @@
 import { SelectSize } from "./SelectSize.component"
+import { SelectColor } from "./SelectColor.component"
 export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileInputState, handleChange, newItem}) => {
   return (
     <div>
@@ -48,12 +49,10 @@ export const NewItemComponent = ({handleSubmitFile, handleFileInputChange, fileI
         onChange={handleChange}
         placeholder="Description"
         />
-        <input type="text"
-        className="border border-black rounded-md p-1"
-        name="color"
-        value={newItem.color}
-        placeholder="Color"
-        onChange={handleChange}/>
+        <SelectColor
+        newItem={newItem}
+        handleChange={handleChange}
+        />
         <SelectSize
         newItem={newItem}
         handleChange={handleChange}
