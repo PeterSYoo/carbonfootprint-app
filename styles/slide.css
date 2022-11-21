@@ -1,0 +1,53 @@
+/* .toDisplayModal{
+  margin: auto;
+  top: 10%;
+  position: fixed;
+  z-index: 999;
+  height: 100%;
+  border: 1px solid red;
+  animation: slidedown 0.3s 1;
+  animation-fill-mode: forwards;
+} */
+.show-sometimes {
+  z-index: 10;
+  position: fixed;
+  bottom: -8px;
+
+}
+
+
+.hide-menu {
+  display: none;
+}
+.slide-menu {
+  min-height: 530px;
+  width: 100vw;
+  z-index: 10;
+  display: block;
+}
+.hidesometimes{
+  position: fixed;
+  z-index: 10;
+  bottom: -8px;
+  width: 100vw;
+}
+
+
+@keyframes slidedown {
+  0% {
+      transform: translateY(0px);
+      animation-timing-function: ease-out;
+  }
+  60% {
+      transform: translateY(10px);
+      animation-timing-function: ease-in;
+  }
+  80% {
+      transform: translateY(20px);
+      animation-timing-function: ease-out;
+  }
+  100% {
+      transform: translateY(400px);
+      animation-timing-function: ease-in;
+  }
+}

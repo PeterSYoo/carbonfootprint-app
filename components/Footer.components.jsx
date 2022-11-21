@@ -12,7 +12,7 @@ const Guest = () => {
 const User = (handleSignout) => {
   return (
     <>
-      <div className="fixed inset-x-0 bottom-0">
+      <div className="fixed z-20 inset-x-0 bottom-0">
         <div className="flex justify-between w-full bg-teal px-10 py-4 text-white">
           <Link href="/profile">
             <FiUser size={28} />
