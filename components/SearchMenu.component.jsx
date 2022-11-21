@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { MenuItem } from './MenuItem.component'
 
-export const SearchMenu = ({ searchBy, handleSearch, setInputS ,setSearchBy }) => {
+export const SearchMenu = ({ handleSearch}) => {
   const [price, setPrice] = useState(0)
   const [showCat, setShowCat] = useState(false)
   const [showCol, setShowCol] = useState(false)
@@ -27,15 +27,14 @@ export const SearchMenu = ({ searchBy, handleSearch, setInputS ,setSearchBy }) =
           <div className='font-bold'>
             <h6 className='  '>Size</h6>
             <div className='grid grid-cols-4 gap-5 text-center capitalize text-white'>
-              <p className='bg-teal rounded-md'>XXS</p>
               <MenuItem text={"XXS"} property={"size"} handleSearch={handleSearch}/>
-              <p className=' bg-teal rounded-md'>XS</p>
-              <p className=' bg-teal rounded-md'>S</p>
-              <p className=' bg-teal rounded-md'>M</p>
-              <p className=' bg-teal rounded-md'>L</p>
-              <p className=' bg-teal rounded-md'>XL</p>
-              <p className=' bg-teal rounded-md'>XXL</p>
-              <p className=' bg-teal rounded-md'>XXXL</p>
+              <MenuItem text={"XS"} property={"size"} handleSearch={handleSearch}/>
+              <MenuItem text={"S"} property={"size"} handleSearch={handleSearch}/>
+              <MenuItem text={"M"} property={"size"} handleSearch={handleSearch}/>
+              <MenuItem text={"L"} property={"size"} handleSearch={handleSearch}/>
+              <MenuItem text={"XL"} property={"size"} handleSearch={handleSearch}/>
+              <MenuItem text={"XXL"} property={"size"} handleSearch={handleSearch}/>
+              <MenuItem text={"XXXL"} property={"size"} handleSearch={handleSearch}/>
             </div>
           </div>
 
@@ -48,20 +47,20 @@ export const SearchMenu = ({ searchBy, handleSearch, setInputS ,setSearchBy }) =
             </div>
           
             <div className='grid grid-cols-2 gap-5 font-bold text-center capitalize text-white'>
-              <p className=' bg-teal rounded-md'>Activewear</p>
-              <p className=' bg-teal rounded-md'>blazers</p>
+              <MenuItem text={"Activewear"} property={"occasion"} handleSearch={handleSearch}/>
+              <MenuItem text={"blazers"} property={"occasion"} handleSearch={handleSearch}/>
               {showCat &&
               <>
-                <p className='bg-teal rounded-md'>jeans</p>
-                <p className=' bg-teal rounded-md'>dresses</p>
-                <p className=' bg-teal rounded-md'>pants</p>
-                <p className=' bg-teal rounded-md'>tops</p>
-                <p className=' bg-teal rounded-md'>shoes</p>
-                <p className=' bg-teal rounded-md'>rompers</p>
-                <p className=' bg-teal rounded-md'>jackets</p>
-                <p className=' bg-teal rounded-md'>sweaters</p>
-                <p className=' bg-teal rounded-md'>Shorts</p>
-                <p className=' bg-teal rounded-md'>Suits</p> 
+                <MenuItem text={"jeans"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"dresses"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"pants"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"tops"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"shoes"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"rompers"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"jackets"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"sweaters"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"shorts"} property={"occasion"} handleSearch={handleSearch}/>
+                <MenuItem text={"Suits"} property={"occasion"} handleSearch={handleSearch}/>
               </>}
               
 
@@ -75,20 +74,20 @@ export const SearchMenu = ({ searchBy, handleSearch, setInputS ,setSearchBy }) =
               </button>
             </div>
             <div className='grid grid-cols-4 gap-5 text-center capitalize text-white'>
-              <p className=' bg-teal rounded-md'>black</p>
-              <p className=' bg-teal rounded-md'>white</p>
-              <p className=' bg-teal rounded-md'>gold</p>
-              <p className=' bg-teal rounded-md'>silver</p>
+              <MenuItem text={"black"} property={"color"} handleSearch={handleSearch}/>
+              <MenuItem text={"white"} property={"color"} handleSearch={handleSearch}/>
+              <MenuItem text={"gold"} property={"color"} handleSearch={handleSearch}/>
+              <MenuItem text={"silver"} property={"color"} handleSearch={handleSearch}/>
               {showCol &&
               <>
-                <p className=' bg-teal rounded-md'>brown</p>
-                <p className=' bg-teal rounded-md'>red</p>
-                <p className=' bg-teal rounded-md'>orange</p>
-                <p className=' bg-teal rounded-md'>yellow</p>
-                <p className=' bg-teal rounded-md'>green</p>
-                <p className=' bg-teal rounded-md'>blue</p>
-                <p className=' bg-teal rounded-md'>purple</p>
-                <p className=' bg-teal rounded-md'>pink</p>
+                <MenuItem text={"brown"} property={"color"} handleSearch={handleSearch}/>
+                <MenuItem text={"red"} property={"color"} handleSearch={handleSearch}/>
+                <MenuItem text={"orange"} property={"color"} handleSearch={handleSearch}/>
+                <MenuItem text={"yellow"} property={"color"} handleSearch={handleSearch}/>
+                <MenuItem text={"green"} property={"color"} handleSearch={handleSearch}/>
+                <MenuItem text={"blue"} property={"color"} handleSearch={handleSearch}/>
+                <MenuItem text={"purple"} property={"color"} handleSearch={handleSearch}/>
+                <MenuItem text={"pink"} property={"color"} handleSearch={handleSearch}/>
               </>
               }
               
