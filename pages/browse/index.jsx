@@ -57,16 +57,6 @@ const BrowsePage = () => {
   return (
     <>
       <div className="w-5/6 grid grid-cols-2 mx-auto mt-12 gap-5 mb-48">
-        <Search
-          inputS={inputS}
-          searchBy={searchBy}
-          sortValue={sortValue}
-          sortResults={sortResults}
-          handleSearch={handleSearch}
-          setSortValue={setSortValue}
-          setInputS={setInputS}
-          setSearchBy={setSearchBy}
-        />
         {foundItems?.map((clothes) => (
           <Fragment key={clothes._id}>
             <div className="flex flex-col w-full">
@@ -78,9 +68,16 @@ const BrowsePage = () => {
           </Fragment>
         ))}
       </div>
-      <SearchMenu>
-        
-      </SearchMenu>
+      <SearchMenu
+        inputS={inputS}
+        searchBy={searchBy}
+        sortValue={sortValue}
+        sortResults={sortResults}
+        handleSearch={handleSearch}
+        setSortValue={setSortValue}
+        setInputS={setInputS}
+        setSearchBy={setSearchBy}
+        />
     </>
   );
 };

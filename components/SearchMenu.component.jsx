@@ -1,6 +1,7 @@
 import {useState} from 'react'
+import { MenuItem } from './MenuItem.component'
 
-export const SearchMenu = () => {
+export const SearchMenu = ({ searchBy, handleSearch, setInputS ,setSearchBy }) => {
   const [price, setPrice] = useState(0)
   const [showCat, setShowCat] = useState(false)
   const [showCol, setShowCol] = useState(false)
@@ -27,6 +28,7 @@ export const SearchMenu = () => {
             <h6 className='  '>Size</h6>
             <div className='grid grid-cols-4 gap-5 text-center capitalize text-white'>
               <p className='bg-teal rounded-md'>XXS</p>
+              <MenuItem text={"XXS"} property={"size"} handleSearch={handleSearch}/>
               <p className=' bg-teal rounded-md'>XS</p>
               <p className=' bg-teal rounded-md'>S</p>
               <p className=' bg-teal rounded-md'>M</p>
