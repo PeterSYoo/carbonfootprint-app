@@ -60,9 +60,8 @@ const ProfilePage = ({ session }) => {
             {userItems?.map((item) => (
               <Fragment key={item._id}>
                 <div className="flex flex-col">
-                  <div className="bg-gray-300 h-36 flex justify-center items-center">
-                    {item.name}
-                  </div>
+                  <img  atl={item.name} src={item.photos[0]}className="bg-gray-300 h-36 flex justify-center items-center" />
+                    
                   <button
                     onClick={() => handleDelete(item._id)}
                     className="border border-black p-2 mb-4"
