@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const SelectSize = ({handleChange, newItem}) => {
   return (
     <select className="border border-black rounded-md p-1" name="size" value={newItem.size} onChange={(e)=> handleChange(e)}>
