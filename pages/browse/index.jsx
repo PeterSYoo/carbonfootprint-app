@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Fragment, useState, useEffect } from 'react';
 import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 import { getClothes } from '../../lib/clothesHelper';
-import { Search } from '../../components/Search.component';
 import { getSession } from 'next-auth/react';
+import { SearchMenu } from '../../components/SearchMenu.component';
 
 const BrowsePage = () => {
   const { data, isLoading, isError, error } = useQuery(['clothes'], () =>
@@ -20,23 +20,29 @@ const BrowsePage = () => {
   useEffect(() => {
     setFoundItems(data);
   }, [data]);
+
+  const searchByPrice = (price) => {
+    if (price < 99){
+      const found = data.filter((item) => {(item.price <= price ) })
+      setFoundItems(found);
+    }else{
+      setFoundItems(data)
+    }
+  }
   const searchFunction = (prop, str) => {
     const found = data.filter((item) =>
       item[prop].toUpperCase().includes(str.toUpperCase())
     );
-    console.table(found);
-    console.table(data);
-    console.log(data);
     setFoundItems(found);
   };
 
-  let handleSearch = (val, str) => {
-    if (str === '') {
+  let handleSearch = (prop, val) => {
+    if (val === '') {
       return;
     } else {
       setShowSearch(true);
     }
-    searchFunction(val, str);
+    searchFunction(prop, val);
   };
 
   const sortResults = (field) => {
@@ -56,16 +62,6 @@ const BrowsePage = () => {
   return (
     <>
       <div className="w-5/6 grid grid-cols-2 mx-auto mt-12 gap-5 mb-48">
-        <Search
-          inputS={inputS}
-          searchBy={searchBy}
-          sortValue={sortValue}
-          sortResults={sortResults}
-          handleSearch={handleSearch}
-          setSortValue={setSortValue}
-          setInputS={setInputS}
-          setSearchBy={setSearchBy}
-        />
         {foundItems?.map((clothes) => (
           <Fragment key={clothes._id}>
             <div className="flex flex-col w-full">
@@ -77,6 +73,17 @@ const BrowsePage = () => {
           </Fragment>
         ))}
       </div>
+      <SearchMenu
+        searchByPrice={searchByPrice}
+        inputS={inputS}
+        searchBy={searchBy}
+        sortValue={sortValue}
+        sortResults={sortResults}
+        handleSearch={handleSearch}
+        setSortValue={setSortValue}
+        setInputS={setInputS}
+        setSearchBy={setSearchBy}
+        />
     </>
   );
 };

@@ -10,6 +10,7 @@ import {
 import { Header } from '../components/Header.components';
 import { LoadingSpinner } from '../components/LoadingSpinner.components';
 import '../styles/globals.css';
+import '../styles/slide.css';
 import { Footer } from '../components/Footer.components';
 
 const queryClient = new QueryClient();
