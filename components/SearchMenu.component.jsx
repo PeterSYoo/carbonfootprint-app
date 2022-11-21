@@ -1,17 +1,26 @@
 import {useState} from 'react'
 import { MenuItem } from './MenuItem.component'
 
-export const SearchMenu = ({ handleSearch}) => {
+export const SearchMenu = ({ handleSearch, searchByPrice}) => {
   const [price, setPrice] = useState(0)
   const [showCat, setShowCat] = useState(false)
   const [showCol, setShowCol] = useState(false)
   const [serachS, setSearchS] = useState('')
   const [showModal, setShowModal] = useState(false)
 
+  const handleChange= (e) => {
+    setPrice(e.currentTarget.value)
+    searchByPrice(e.currentTarget.value)
+  }
+
+  const handleNameChange = (e) =>{
+    setSearchS(e.currentTarget.value)
+  }
+
   return (
     <div className={`${showModal ? "show-sometimes overflow-y-hidden" : "hidesometimes overflow-y-hidden" } text-lg my-16 bg-amber-100 rounded-t-3xl`}>
       <div className='p-2 pt-6 pl-6 rounded-t-3xl border border-black'>
-        <input type="text" value={serachS} onChange={(e)=>setSearchS(e.currentTarget.value)} className='w-5/6 border border-black rounded-2xl p-1 focus:outline-none'/>
+        <input type="text" value={serachS} onChange={(e)=>{handleNameChange(e)}} className='w-5/6 border border-black rounded-2xl p-1 focus:outline-none'/>
         { showModal ? <button className='ml-4 select-none' onClick={()=>setShowModal(false)}>X</button> :
         <button className='ml-4 select-none' onClick={()=>setShowModal(!showModal)}>&#8593;</button>}
       </div>
@@ -19,7 +28,7 @@ export const SearchMenu = ({ handleSearch}) => {
         <div className='px-6'>
           <h6 className='font-bold '>Price</h6>
           <p className='  text-center	'>{`$${price}`}</p>
-            <input type="range" min="1" max="100" value={price} className=" w-full focus:outline-none in-range:border-green-500" id="myRange" onChange={(e)=>setPrice(e.currentTarget.value)} style={{backgroundColor: 'blue'}}/>
+            <input type="range" min="1" max="100" value={price} className=" w-full focus:outline-none in-range:border-green-500" id="myRange" onChange={(e)=>handleChange(e)} style={{backgroundColor: 'blue'}}/>
             <div className='flex justify-between'>
               <p> $0 </p>
               <p> +$100</p>

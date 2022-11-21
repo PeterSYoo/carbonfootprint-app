@@ -23,12 +23,12 @@ const BrowsePage = () => {
   }, [data]);
 
   const searchByPrice = (price) => {
-    const found = data.filter((item) =>
-      item.filter((item)=> {
-        (item.price <= price ) 
-      })
-    );
-    setFoundItems(found);
+    if (price < 99){
+      const found = data.filter((item) => {(item.price <= price ) })
+      setFoundItems(found);
+    }else{
+      setFoundItems(data)
+    }
   }
   const searchFunction = (prop, str) => {
     const found = data.filter((item) =>
@@ -75,6 +75,7 @@ const BrowsePage = () => {
         ))}
       </div>
       <SearchMenu
+        searchByPrice={searchByPrice}
         inputS={inputS}
         searchBy={searchBy}
         sortValue={sortValue}
