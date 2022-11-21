@@ -21,8 +21,16 @@ const BrowsePage = () => {
   useEffect(() => {
     setFoundItems(data);
   }, [data]);
+
+  const searchByPrice = (price) => {
+    const found = data.filter((item) =>
+      item.filter((item)=> {
+        (item.price <= price ) 
+      })
+    );
+    setFoundItems(found);
+  }
   const searchFunction = (prop, str) => {
-    console.log(prop)
     const found = data.filter((item) =>
       item[prop].toUpperCase().includes(str.toUpperCase())
     );
