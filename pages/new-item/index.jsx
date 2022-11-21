@@ -34,10 +34,9 @@ export default function Upload({ session }) {
     return <>Error {error.message}</>;
   }
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(session.id)
+    console.log(session.id);
     setNewItem((prev) => {
       return {
         ...prev,
@@ -62,13 +61,16 @@ export default function Upload({ session }) {
       const parsedImg = await imageUpload.json();
       newItem.photos = [parsedImg.url];
       newItem.user = session.id;
-      const request = await fetch(`http://localhost:3000/api/clothes`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newItem),
-      });
+      const request = await fetch(
+        `https://carbonfootprint-app.vercel.app/api/clothes`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newItem),
+        }
+      );
       const res = await request.json();
       console.log(newItem, res);
       if (res.status !== 404) {
