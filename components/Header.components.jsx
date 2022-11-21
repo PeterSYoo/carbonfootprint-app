@@ -20,6 +20,7 @@ export const Header = () => {
             src="https://i.imgur.com/NO3xCzW.png"
             width={214}
             height={30}
+            alt="logo"
           />
         </Link>
         {session ? (
