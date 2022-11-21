@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { unstable_getServerSession } from 'next-auth';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -8,11 +8,10 @@ import { usernameValidate } from '../../lib/usernameValidate';
 import { getUser, getUsers, updateUser } from '../../lib/usersHelper';
 import { authOptions } from '../api/auth/[...nextauth]';
 
-const ChangeUsernamePage = () => {
+const ChangeUsernamePage = ({ session }) => {
   const [hydrated, setHydrated] = useState(false);
 
   const queryClient = useQueryClient();
-  const { data: session } = useSession();
   const router = useRouter();
 
   const { data } = useQuery(['user'], () => getUser(session.id));
@@ -120,6 +119,17 @@ const ChangeUsernamePage = () => {
 export default ChangeUsernamePage;
 
 export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
+
   return {
     props: {
       session: await unstable_getServerSession(

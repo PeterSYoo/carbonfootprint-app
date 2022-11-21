@@ -1,10 +1,10 @@
 import { FcGoogle } from 'react-icons/fc';
 import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]';
 
-export default function Home() {
-  const { data: session } = useSession();
-
+export default function Home({ session }) {
   const handleGoogleSignin = async () => {
     signIn('google', {
       callbackUrl: '/change-username',
@@ -67,3 +67,15 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = async (context) => {
+  return {
+    props: {
+      session: await unstable_getServerSession(
+        context.req,
+        context.res,
+        authOptions
+      ),
+    },
+  };
+};

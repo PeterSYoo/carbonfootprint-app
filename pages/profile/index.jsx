@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { unstable_getServerSession } from 'next-auth';
-import { useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
 import { LoadingSpinner } from '../../components/LoadingSpinner.components';
 import { deleteClothe } from '../../lib/clothesHelper';
@@ -10,12 +10,10 @@ import { getUserClothes } from '../../lib/userClothesHelper';
 import { getUser } from '../../lib/usersHelper';
 import { authOptions } from '../api/auth/[...nextauth]';
 
-const ProfilePage = () => {
+const ProfilePage = ({ session }) => {
   const [hydrated, setHydrated] = useState(false);
-  const router = useRouter();
 
   const queryClient = useQueryClient();
-  const { data: session } = useSession();
 
   const { data, isLoading, isError, error } = useQuery(['user'], () =>
     getUser(session.id)
@@ -31,12 +29,6 @@ const ProfilePage = () => {
     await mutateAsync(id);
     queryClient.invalidateQueries(['userClothes']);
   };
-
-  useEffect(() => {
-    if (!session) {
-      router.push('/');
-    }
-  });
 
   useEffect(() => {
     setHydrated(true);
@@ -81,9 +73,11 @@ const ProfilePage = () => {
               </Fragment>
             ))}
             <div className="flex flex-col">
-              <div className="bg-gray-300 h-36 flex justify-center items-center text-3xl">
-                +
-              </div>
+              <Link href="/new-item">
+                <div className="bg-gray-300 h-36 flex justify-center items-center text-3xl">
+                  +
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -95,6 +89,17 @@ const ProfilePage = () => {
 export default ProfilePage;
 
 export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
+
   return {
     props: {
       session: await unstable_getServerSession(
