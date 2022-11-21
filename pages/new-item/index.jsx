@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import {clothe}
 import Router from 'next/router';
 import { NewItemComponent } from '../../components/NewItemComponent.component';
 import { getSession } from 'next-auth/react';
@@ -63,7 +62,7 @@ export default function Upload({ session }) {
       const parsedImg = await imageUpload.json();
       newItem.photos = [parsedImg.url];
       newItem.user = session.id;
-      const request = await fetch(`https://carbonfootprint-app.vercel.app`, {
+      const request = await fetch(`'https://api.cloudinary.com/v1_1/dkmbw4f6d/image/upload'`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
