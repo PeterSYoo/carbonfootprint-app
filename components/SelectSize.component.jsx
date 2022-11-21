@@ -2,15 +2,16 @@ import React from 'react'
 
 export const SelectSize = ({handleChange, newItem}) => {
   return (
-    <select name="size" value={newItem.size} onChange={(e)=> handleChange(e)}>
+    <select className="border border-black rounded-md p-1" name="size" value={newItem.size} onChange={(e)=> handleChange(e)}>
+      <option value="" disabled> Size</option>
       <option value="XXS">XXS</option>
-      <option value="XS">xs</option>
-      <option value="S">Category</option>
-      <option value="M">Price</option>
-      <option value="L">Color</option>
-      <option value="XL">Color</option>
-      <option value="XXL">Color</option>
-      <option value="XXXL">Color</option>
+      <option value="XS">XS</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+      <option value="XL">XL</option>
+      <option value="XXL">XXL</option>
+      <option value="XXXL">XXXL</option>
 		</select>
   )
 }
