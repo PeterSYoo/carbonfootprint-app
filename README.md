@@ -15,7 +15,3 @@ https://docs.google.com/presentation/d/1Ox2wtJUTbEuF1yp9dTl3UQ0x2IpFDzoXaCdjlISp
 - Mongoose
 - React Icons
 - React Spinners
-
-## Get Started
-
-https://carbonfootprint-app.vercel.app/
